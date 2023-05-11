@@ -1,0 +1,73 @@
+﻿@model IEnumerable<AcceptOrders.Models.Orders>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Список заказов</h1>
+
+<p>
+   <h2> <a asp-action="Create">Создать заказ</a></h2>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SenderCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SenderAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecipientCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecipientAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DatePickup)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            
+            <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">  @Html.DisplayFor(modelItem => item.Number)</a>
+            </td>
+            <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">  @Html.DisplayFor(modelItem => item.SenderCity)</a>
+            </td>
+            <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">  @Html.DisplayFor(modelItem => item.SenderAddress)</a>
+            </td>
+            <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">  @Html.DisplayFor(modelItem => item.RecipientCity)</a>
+            </td>
+            <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">  @Html.DisplayFor(modelItem => item.RecipientAddress)</a>
+            </td>
+            <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">  @Html.DisplayFor(modelItem => item.Weight)</a>
+            </td>
+            <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">  @Html.DisplayFor(modelItem => item.DatePickup)</a>
+            </td>
+           
+
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Изменить заказ</a>|               
+                <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
