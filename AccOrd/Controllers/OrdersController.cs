@@ -46,14 +46,11 @@ namespace AccOrd.Controllers
         }
 
         // GET: Orders/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+        public IActionResult Create()=> View();
+       
+       
 
-        // POST: Orders/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Orders/Create       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Number,SenderCity,SenderAddress,RecipientCity,RecipientAddress,Weight,DatePickup")] Orders orders)
@@ -90,10 +87,8 @@ namespace AccOrd.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Number,SenderCity,SenderAddress,RecipientCity,RecipientAddress,Weight,DatePickup")] Orders orders)
         {
-            if (id != orders.Id)
-            {
-                return NotFound();
-            }
+            if (id != orders.Id)           
+                return NotFound();           
 
             if (ModelState.IsValid)
             {
@@ -104,14 +99,11 @@ namespace AccOrd.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OrdersExists(orders.Id))
-                    {
+                    if (!OrdersExists(orders.Id))                   
                         return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                   
+                    else                   
+                        throw;                   
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -121,18 +113,15 @@ namespace AccOrd.Controllers
         // GET: Orders/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Orders == null)
-            {
+            if (id == null || _context.Orders == null)        
                 return NotFound();
-            }
+           
 
             var orders = await _context.Orders
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (orders == null)
-            {
+            if (orders == null)            
                 return NotFound();
-            }
-
+            
             return View(orders);
         }
 
@@ -142,22 +131,18 @@ namespace AccOrd.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Orders == null)
-            {
-                return Problem("Entity set 'AccOrdContext.Orders'  is null.");
-            }
+                 return Problem("Entity set 'AccOrdContext.Orders'  is null.");
+            
             var orders = await _context.Orders.FindAsync(id);
-            if (orders != null)
-            {
-                _context.Orders.Remove(orders);
-            }
+            if (orders != null)            
+                _context.Orders.Remove(orders);           
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool OrdersExists(int id)
-        {
-          return (_context.Orders?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+        private bool OrdersExists(int id) =>
+              (_context.Orders?.Any(e => e.Id == id)).GetValueOrDefault();
+        
     }
 }
